@@ -90,3 +90,19 @@ theme detection (Theme extraction means finding the main topic of customer feedb
 problem or difficulty 
 
 One common challenge was data quality. Different sources had missing or inconsistent information. i had to clean, validate and standardize the data before using it for analysis or modelling.
+
+
+
+
+
+
+Hi, My name is Akul varshney
+So, I’ve got about 4 plus years of experience working across data analytics, data science,  machine learning, and AI. Over that time, I’ve worked in a few different areas like utilities, insurance, and customer analytics, which has really helped me understand both the day-to-day operational side of things and what customers actually care about.
+Day-to-day, my main toolkit is Python, SQL, data cleaning, feature engineering, and machine learning models like XGBoost, plus newer stuff like NLP and LLMs like GPT-4o, fastApi, Azure, Aws.
+My general approach is pretty simple: I hate building models just for the sake of it. Whenever a problem comes in, my first instinct isn't to open up a notebook and start coding. I like to sit back and ask: What is the business actually struggling with here? What data do we have, what story is it telling us, and do we even need a fancy machine learning model, or is a simple analysis enough?
+Two projects I've worked on recently feel especially relevant to what Thames Water is doing right now.
+The first one was a customer feedback project. We had a massive mountain of survey comments and feedback, and the team was drowning in it—nobody had the time to read through all of it manually. So, we used NLP and LLMs to do sentiment analysis and spot recurring themes. For example, if a ton of people suddenly started complaining about billing delays or bad service, the model would flag it and show us if that specific issue was growing.
+For me, the goal wasn't just giving the business a generic 'positive or negative' score. I wanted to answer the practical questions: What are people actually mad about? How many customers are affected? Is this getting worse, and where should the team fix things first? It turned a messy pile of text into something the business could actually act on. I see a lot of overlap here with the MEX and SAT text analytics work at Thames Water, where you're trying to make sense of customer comments to catch issues early.
+The second project was an AI claims and risk analysis tool. We mixed structured data with unstructured info from documents using GPT-4o, and then fed those features into XGBoost models to spot patterns and flag high-risk cases. Instead of someone manually checking every single case the same way, the system helped highlight the ones that actually needed human attention.
+On top of the modeling side, I've spent a good chunk of time on MLOps. I strongly believe that building a model is only half the battle. If the business is going to rely on it every day, you need proper versioning, monitoring, and a solid plan to retrain it when the data changes. Since Thames Water is currently scaling up its MLOps framework and pushing more models into production, I feel like I'd fit right in.
+Overall, I just really like bridging the gap between tech and actual business decisions. I want to build things that actually reduce manual work, improve customer service, and solve real problems—which is why I'm so excited about this role!
