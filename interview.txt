@@ -38,6 +38,9 @@ i also checked for data drift, which means the new data starts becoming differen
 If model performance went down, or new data was available, the model could be retrained.
 This project helped me understand what happens to a model after development and how it is managed in production.
 
+For Python ML models, we can save the trained model using joblib or pickle. Then the same model file can be loaded inside the prediction service.”
+training data testing data - 80-20%
+
 Project 4 — Product and Service Recommendation System
 The fourth project was a recommendation system.
 The goal was to show users products or services based on their interests and past behaviour.
