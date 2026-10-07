@@ -1,7 +1,7 @@
 Hi, thank you for the opportunity.
 I have around 3.5 years of experience in data analytics, data science, machine learning, and AI.
 I have worked with structured data like tables and databases, and unstructured data like text, documents, and customer feedback.
-My work includes data cleaning, analysis, feature creation, machine learning models, NLP, LLMs, model testing, and some MLOps work.
+My work includes data cleaning (depending on the data. i remove some records, fill numerical values using mean or median), analysis, feature creation, machine learning models, NLP, LLMs, model testing, and some MLOps work.
 I have mainly worked with Python, SQL, XGBoost, NLP, GPT-4o, data pipelines, and model monitoring.
 I usually start by understanding the business problem, then I check the data, clean it, and decide whether the solution needs normal data analysis, machine learning, or an LLM.
 I would like to explain four projects from my experience.
@@ -10,35 +10,41 @@ Project 1 — AI Claims Intelligence Platform
 The first project was an AI Claims Intelligence Platform.
 The main goal was to reduce manual work in insurance claim processing.
 Claims data came from both databases and documents.
-We used GPT-4o and NLP to read the documents and extract useful information like claim amount, policy details, incident date, and customer details.
-After that, we prepared the data and created useful features for the model.
-We used XGBoost for classification and risk-related prediction.
-We also compared information from different documents to find differences in dates, amounts, or policy details.
+i used GPT-4o and NLP to read the documents and extract useful information like claim amount, policy details, incident date, and customer details.
+After that, i prepared the data and created useful features for the model.
+i used XGBoost for classification and risk-related prediction. i even guard railed the prompts and model and provided correct context, so it doesn't hallucinate and give us the result for the data that i have.
+i also compared information from different documents to find differences in dates, amounts, or policy details.
 The main result was less manual work and better claim analysis.
 
 Project 2 — LLM Text Analytics and Customer Feedback
 The second project was related to customer feedback analysis.
 The goal was to understand a large amount of customer feedback without reading everything manually.
-We used LLMs and NLP for sentiment analysis, theme detection, and finding repeated customer issues.
+i used LLMs and NLP for 
+sentiment analysis (Sentiment analysis means finding whether a piece of text is positive, negative or neutral), 
+theme detection (Theme extraction means finding the main topic of customer feedback. For example, if a customer says the payment keeps failing, the theme can be payment or checkout.)and finding repeated customer issues.
 For example, if many customers were complaining about payment problems, the system could identify that as a common issue.
-We checked the model results using sample data and metrics like precision, recall, and F1 score.
+i checked the model results using sample data and metrics like 
+precision (to tells us, out of all the positive predictions made by the model, how many were actually correct.), 
+recall (ells us, out of all the actual positive cases, how many the model was able to find), 
+and F1 score (F1 score gives a balance between precision and recall)
 The main result was faster customer feedback analysis and easier issue tracking.
 
 Project 3 — MLOps and Model Deployment
 The third project was related to MLOps.
 The goal was to manage machine learning models after they were built.
 I worked on areas like model versioning, prediction logging, deployment support, monitoring, and retraining.
-We also checked for data drift, which means the new data starts becoming different from the data used to train the model.
+After training the model, i saved the trained model file. i created an API around it using FastAPI. During application startup, the model was loaded into memory. When an API request came, i validated the input, converted it into the same format used during training, passed it to the model, and returned the prediction.
+i also checked for data drift, which means the new data starts becoming different from the data used to train the model.
 If model performance went down, or new data was available, the model could be retrained.
 This project helped me understand what happens to a model after development and how it is managed in production.
 
 Project 4 — Product and Service Recommendation System
 The fourth project was a recommendation system.
 The goal was to show users products or services based on their interests and past behaviour.
-We worked with two main methods: collaborative filtering and content-based filtering.
+i worked with two main methods: collaborative filtering and content-based filtering.
 Collaborative filtering means recommending something based on what similar users liked.
 Content-based filtering means recommending something similar to what the user already liked or used.
-We used past purchase and usage data to create recommendations.
+i used past purchase and usage data to create recommendations.
 The main goal was to make the recommendations more useful for each customer.
 
 Your overall work process
@@ -56,3 +62,28 @@ Closing
 Overall, in my 3.5 years of experience, I have worked on data analysis, machine learning, NLP, LLMs, recommendation systems, and MLOps.
 These four projects gave me experience in working with documents, customer feedback, prediction models, model monitoring, and recommendation systems.
 I am now looking for a role where I can continue working in data science and AI, and improve my skills in machine learning and GenAI.
+
+
+
+
+what is xgboost
+
+XGBoost is a machine learning algorithm based on decision trees. It creates multiple trees one after another, and each new tree tries to correct the mistakes of the previous trees.
+
+
+why xg boost 
+
+XGBoost works well with structured and tabular data. It can handle complex patterns and usually gives good results for classification problems.
+
+precision (to tells us, out of all the positive predictions made by the model, how many were actually correct.), 
+recall (ells us, out of all the actual positive cases, how many the model was able to find), 
+and F1 score (F1 score gives a balance between precision and recall)
+
+
+sentiment analysis (Sentiment analysis means finding whether a piece of text is positive, negative or neutral), 
+theme detection (Theme extraction means finding the main topic of customer feedback. For example, if a customer says the payment keeps 
+
+
+problem or difficulty 
+
+One common challenge was data quality. Different sources had missing or inconsistent information. i had to clean, validate and standardize the data before using it for analysis or modelling.
