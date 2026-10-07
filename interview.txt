@@ -1,0 +1,58 @@
+Hi, thank you for the opportunity.
+I have around 3.5 years of experience in data analytics, data science, machine learning, and AI.
+I have worked with structured data like tables and databases, and unstructured data like text, documents, and customer feedback.
+My work includes data cleaning, analysis, feature creation, machine learning models, NLP, LLMs, model testing, and some MLOps work.
+I have mainly worked with Python, SQL, XGBoost, NLP, GPT-4o, data pipelines, and model monitoring.
+I usually start by understanding the business problem, then I check the data, clean it, and decide whether the solution needs normal data analysis, machine learning, or an LLM.
+I would like to explain four projects from my experience.
+
+Project 1 — AI Claims Intelligence Platform
+The first project was an AI Claims Intelligence Platform.
+The main goal was to reduce manual work in insurance claim processing.
+Claims data came from both databases and documents.
+We used GPT-4o and NLP to read the documents and extract useful information like claim amount, policy details, incident date, and customer details.
+After that, we prepared the data and created useful features for the model.
+We used XGBoost for classification and risk-related prediction.
+We also compared information from different documents to find differences in dates, amounts, or policy details.
+The main result was less manual work and better claim analysis.
+
+Project 2 — LLM Text Analytics and Customer Feedback
+The second project was related to customer feedback analysis.
+The goal was to understand a large amount of customer feedback without reading everything manually.
+We used LLMs and NLP for sentiment analysis, theme detection, and finding repeated customer issues.
+For example, if many customers were complaining about payment problems, the system could identify that as a common issue.
+We checked the model results using sample data and metrics like precision, recall, and F1 score.
+The main result was faster customer feedback analysis and easier issue tracking.
+
+Project 3 — MLOps and Model Deployment
+The third project was related to MLOps.
+The goal was to manage machine learning models after they were built.
+I worked on areas like model versioning, prediction logging, deployment support, monitoring, and retraining.
+We also checked for data drift, which means the new data starts becoming different from the data used to train the model.
+If model performance went down, or new data was available, the model could be retrained.
+This project helped me understand what happens to a model after development and how it is managed in production.
+
+Project 4 — Product and Service Recommendation System
+The fourth project was a recommendation system.
+The goal was to show users products or services based on their interests and past behaviour.
+We worked with two main methods: collaborative filtering and content-based filtering.
+Collaborative filtering means recommending something based on what similar users liked.
+Content-based filtering means recommending something similar to what the user already liked or used.
+We used past purchase and usage data to create recommendations.
+The main goal was to make the recommendations more useful for each customer.
+
+Your overall work process
+In most data science projects, my process is simple.
+First, I understand the business problem.
+Then I collect and study the data.
+After that, I clean the data and check for missing values, wrong values, duplicates, and unusual data.
+Then I create useful features and prepare the data for the model.
+After that, I train the model and test it using the right metrics.
+If the model performs well, the next step is deployment and monitoring.
+I also believe that not every problem needs machine learning. Sometimes simple SQL analysis or reporting can solve the problem.
+So I try to use the right solution based on the problem.
+
+Closing
+Overall, in my 3.5 years of experience, I have worked on data analysis, machine learning, NLP, LLMs, recommendation systems, and MLOps.
+These four projects gave me experience in working with documents, customer feedback, prediction models, model monitoring, and recommendation systems.
+I am now looking for a role where I can continue working in data science and AI, and improve my skills in machine learning and GenAI.
