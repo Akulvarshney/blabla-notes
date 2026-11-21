@@ -106,3 +106,118 @@ For me, the goal wasn't just giving the business a generic 'positive or negative
 The second project was an AI claims and risk analysis tool. We mixed structured data with unstructured info from documents using GPT-4o, and then fed those features into XGBoost models to spot patterns and flag high-risk cases. Instead of someone manually checking every single case the same way, the system helped highlight the ones that actually needed human attention.
 On top of the modeling side, I've spent a good chunk of time on MLOps. I strongly believe that building a model is only half the battle. If the business is going to rely on it every day, you need proper versioning, monitoring, and a solid plan to retrain it when the data changes. Since Thames Water is currently scaling up its MLOps framework and pushing more models into production, I feel like I'd fit right in.
 Overall, I just really like bridging the gap between tech and actual business decisions. I want to build things that actually reduce manual work, improve customer service, and solve real problems—which is why I'm so excited about this role!
+
+
+
+
+USE [sqlmi-prd-dp-cex-wfm-db];
+GO
+
+WITH OCC_Complaints AS (
+    SELECT CASE_NUMBER
+    FROM reports.vw_OCC_Complaints
+
+    UNION
+
+    SELECT CASE_NUMBER
+    FROM reports.vw_OCC_Complaint_Cases
+),
+
+CP_Unique AS (
+    SELECT
+        PREMISE,
+        MAX(CONTRACT_ACCOUNT) AS CONTRACT_ACCOUNT,
+        MAX(PSR_FLAG) AS PSR_FLAG,
+        MAX(PRIMARY_CIRCUMSTANCE) AS PRIMARY_CIRCUMSTANCE,
+        MAX(INDEX_DEPRIVATION) AS INDEX_DEPRIVATION,
+        MAX(PROPERTY_TYPE) AS PROPERTY_TYPE,
+        MAX(No_of_occupiers) AS No_of_occupiers,
+        MAX(FLG_RESIDENTIAL) AS FLG_RESIDENTIAL,
+        MAX(FLG_WATER_DEPENDANT) AS FLG_WATER_DEPENDANT,
+        MAX(FLG_HELP_DURING_SUPPLY_INTERRUPTION)
+            AS FLG_HELP_DURING_SUPPLY_INTERRUPTION
+    FROM [playground-retail-db].[202610].[CP_DATA_V1]
+    WHERE PREMISE IS NOT NULL
+      AND PREMISE <> '1000000000'
+    GROUP BY PREMISE
+    HAVING COUNT(*) = 1
+)
+
+SELECT
+    -- Case identification
+    c.CASE_ID,
+    c.CASE_NUMBER,
+    c.ACCOUNT_ID,
+    c.CONTACT_ID,
+
+    -- Complaint indicators
+    c.FLG_COMPLAINTCASE,
+
+    CASE
+        WHEN o.CASE_NUMBER IS NOT NULL THEN 1
+        ELSE 0
+    END AS IS_OCC_COMPLAINT,
+
+    CASE
+        WHEN c.FLG_COMPLAINTCASE = 1
+          OR o.CASE_NUMBER IS NOT NULL
+        THEN 1 ELSE 0
+    END AS IS_COMPLAINT,
+
+    -- Complaint classification
+    c.FK_COMPLAINT_CATEGORY_HIGH_ID,
+    c.FK_COMPLAINT_CATEGORY_LOW_ID,
+    c.FK_COMPLAINT_STAGE_ID,
+    c.FK_MID_LEVEL_WORK_TYPE_ID,
+    c.FK_LOW_LEVEL_WORK_TYPE_ID,
+    c.FK_REGION_ID,
+    c.FK_CUSTOMER_SENTIMENT_ID,
+
+    -- Lifecycle
+    c.CREATED_DATE,
+    c.CLOSED_DATE,
+    c.FLG_CLOSED,
+    c.FLG_ESCALATED,
+
+    CASE
+        WHEN c.CLOSED_DATE IS NOT NULL
+        THEN DATEDIFF(
+            HOUR, c.CREATED_DATE, c.CLOSED_DATE
+        )
+    END AS RESOLUTION_HOURS,
+
+    -- Geography
+    c.POSTCODE,
+    a.EXTERNAL_ID AS ADDRESS_EXTERNAL_ID,
+    cp.PREMISE,
+
+    -- Customer demographics
+    cp.CONTRACT_ACCOUNT,
+    cp.PSR_FLAG,
+    cp.PRIMARY_CIRCUMSTANCE,
+    cp.INDEX_DEPRIVATION,
+    cp.PROPERTY_TYPE,
+    cp.No_of_occupiers,
+    cp.FLG_RESIDENTIAL,
+    cp.FLG_WATER_DEPENDANT,
+    cp.FLG_HELP_DURING_SUPPLY_INTERRUPTION,
+
+    -- Demographic match indicator
+    CASE
+        WHEN cp.PREMISE IS NOT NULL THEN 1
+        ELSE 0
+    END AS HAS_CP_DATA
+
+FROM dbo.E_CASE_DETAILS c
+
+LEFT JOIN OCC_Complaints o
+    ON c.CASE_NUMBER = o.CASE_NUMBER
+
+LEFT JOIN dbo.E_ADDRESS_LOCATION a
+    ON c.ADDRESSLOCATION_ID = a.ADDRESS_LOCATION_ID
+
+LEFT JOIN CP_Unique cp
+    ON LTRIM(RTRIM(a.EXTERNAL_ID))
+     = LTRIM(RTRIM(cp.PREMISE))
+
+WHERE c.CREATED_DATE >= '2025-01-01';
