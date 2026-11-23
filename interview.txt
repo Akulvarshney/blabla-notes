@@ -412,3 +412,18 @@ SELECT
 FROM census_lsoa_master
 GROUP BY 1
 ORDER BY 1;
+
+
+
+SELECT
+    column_name,
+    data_type
+FROM dpcex_dev.information_schema.columns
+WHERE table_schema = 'default'
+  AND table_name = 'lsoa_geog_postcode'
+  AND (
+      LOWER(column_name) LIKE '%disability%'
+      OR LOWER(column_name) LIKE '%ethnic%'
+      OR LOWER(column_name) LIKE '%household_composition%'
+  )
+ORDER BY ordinal_position;
