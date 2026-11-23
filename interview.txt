@@ -332,3 +332,14 @@ SELECT
     ) AS MISSING_LSOA_CODES
 FROM dpcex_dev.default.lsoa_geog_postcode;
 
+
+SELECT
+    CENSUS_LSOA_CODE,
+    COUNT(*) AS POSTCODE_COUNT,
+    COUNT(DISTINCT geography_code) AS DISTINCT_GEOGRAPHY_CODES
+FROM dpcex_dev.default.lsoa_geog_postcode
+GROUP BY CENSUS_LSOA_CODE
+ORDER BY POSTCODE_COUNT DESC
+LIMIT 20;
+
+
