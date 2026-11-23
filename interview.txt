@@ -355,3 +355,25 @@ HAVING COUNT(DISTINCT `Population_Density:_Persons_per_square_kilometre_`) > 1
 LIMIT 20;
 
 
+
+
+CREATE OR REPLACE TEMP VIEW census_lsoa_master AS
+SELECT *
+FROM (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY CENSUS_LSOA_CODE
+            ORDER BY POSTCODE_NO_SPACE
+        ) AS rn
+    FROM dpcex_dev.default.lsoa_geog_postcode
+) t
+WHERE rn = 1;
+
+
+
+SELECT
+    COUNT(*) AS TOTAL_ROWS,
+    COUNT(DISTINCT CENSUS_LSOA_CODE) AS UNIQUE_LSOAS
+FROM census_lsoa_master;
+
