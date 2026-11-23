@@ -377,3 +377,20 @@ SELECT
     COUNT(DISTINCT CENSUS_LSOA_CODE) AS UNIQUE_LSOAS
 FROM census_lsoa_master;
 
+
+
+SELECT
+    COUNT(*) AS TOTAL_LSOAS,
+    COUNT(`Population_Density:_Persons_per_square_kilometre_`)
+        AS POPULATION_DENSITY_AVAILABLE,
+    COUNT(*) -
+    COUNT(`Population_Density:_Persons_per_square_kilometre_`)
+        AS POPULATION_DENSITY_MISSING,
+    MIN(`Population_Density:_Persons_per_square_kilometre_`)
+        AS MIN_POPULATION_DENSITY,
+    MAX(`Population_Density:_Persons_per_square_kilometre_`)
+        AS MAX_POPULATION_DENSITY,
+    AVG(`Population_Density:_Persons_per_square_kilometre_`)
+        AS AVG_POPULATION_DENSITY
+FROM census_lsoa_master;
+
