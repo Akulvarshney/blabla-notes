@@ -456,6 +456,7 @@ LIMIT 20;
 
 
 
+
 WITH Disability_Data AS (
     SELECT
         CENSUS_LSOA_CODE,
@@ -465,17 +466,23 @@ WITH Disability_Data AS (
             `Disability:_Total:_All_usual_residents`, 0
         ) AS DISABILITY_PCT
     FROM census_lsoa_master
+),
+Disability_Bands AS (
+    SELECT
+        CASE
+            WHEN DISABILITY_PCT < 10 THEN '01. Below 10%'
+            WHEN DISABILITY_PCT < 20 THEN '02. 10-20%'
+            WHEN DISABILITY_PCT < 30 THEN '03. 20-30%'
+            WHEN DISABILITY_PCT < 40 THEN '04. 30-40%'
+            ELSE '05. 40%+'
+        END AS DISABILITY_BAND
+    FROM Disability_Data
+    WHERE DISABILITY_PCT IS NOT NULL
 )
 SELECT
-    CASE
-        WHEN DISABILITY_PCT < 10 THEN '01. Below 10%'
-        WHEN DISABILITY_PCT < 20 THEN '02. 10–20%'
-        WHEN DISABILITY_PCT < 30 THEN '03. 20–30%'
-        WHEN DISABILITY_PCT < 40 THEN '04. 30–40%'
-        ELSE '05. 40%+'
-    END AS DISABILITY_BAND,
+    DISABILITY_BAND,
     COUNT(*) AS LSOA_COUNT
-FROM Disability_Data
-WHERE DISABILITY_PCT IS NOT NULL
-GROUP BY 1
-ORDER BY 1;
+FROM Disability_Bands
+GROUP BY DISABILITY_BAND
+ORDER BY DISABILITY_BAND;
+
