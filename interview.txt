@@ -394,3 +394,21 @@ SELECT
         AS AVG_POPULATION_DENSITY
 FROM census_lsoa_master;
 
+
+
+SELECT
+    CASE
+        WHEN `Population_Density:_Persons_per_square_kilometre_` < 1000
+            THEN '01. Below 1,000'
+        WHEN `Population_Density:_Persons_per_square_kilometre_` < 3000
+            THEN '02. 1,000–2,999'
+        WHEN `Population_Density:_Persons_per_square_kilometre_` < 5000
+            THEN '03. 3,000–4,999'
+        WHEN `Population_Density:_Persons_per_square_kilometre_` < 10000
+            THEN '04. 5,000–9,999'
+        ELSE '05. 10,000+'
+    END AS DENSITY_BAND,
+    COUNT(*) AS LSOA_COUNT
+FROM census_lsoa_master
+GROUP BY 1
+ORDER BY 1;
