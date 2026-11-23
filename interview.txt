@@ -427,3 +427,30 @@ WHERE table_schema = 'default'
       OR LOWER(column_name) LIKE '%household_composition%'
   )
 ORDER BY ordinal_position;
+
+
+
+SELECT
+    CENSUS_LSOA_CODE,
+
+    `Disability:_Total:_All_usual_residents`
+        AS TOTAL_POPULATION,
+
+    `Disability:_Disabled_under_the_Equality_Act`
+        AS DISABLED_POPULATION,
+
+    ROUND(
+        100.0 *
+        `Disability:_Disabled_under_the_Equality_Act`
+        /
+        NULLIF(
+            `Disability:_Total:_All_usual_residents`,
+            0
+        ),
+        2
+    ) AS DISABILITY_PERCENTAGE
+
+FROM census_lsoa_master
+ORDER BY DISABILITY_PERCENTAGE DESC
+LIMIT 20;
+
