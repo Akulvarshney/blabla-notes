@@ -343,3 +343,15 @@ ORDER BY POSTCODE_COUNT DESC
 LIMIT 20;
 
 
+
+SELECT
+    CENSUS_LSOA_CODE,
+    COUNT(*) AS POSTCODE_COUNT,
+    COUNT(DISTINCT `Population_Density:_Persons_per_square_kilometre_`)
+        AS DISTINCT_POPULATION_DENSITY
+FROM dpcex_dev.default.lsoa_geog_postcode
+GROUP BY CENSUS_LSOA_CODE
+HAVING COUNT(DISTINCT `Population_Density:_Persons_per_square_kilometre_`) > 1
+LIMIT 20;
+
+
